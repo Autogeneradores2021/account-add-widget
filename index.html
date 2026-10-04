@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Widget — desarrollo</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; }
+      label { display: block; margin: 1rem 0; }
+      input { padding: 0.4rem; width: 320px; }
+      pre { background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 8px; max-height: 360px; overflow: auto; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Account Widget (desarrollo)</h1>
+      <p>Página host de ejemplo. El API se configura en <code>.env</code> (<code>VITE_ACCOUNT_API_URL</code> y proxy <code>VITE_API_PROXY_TARGET</code>).</p>
+      <label>
+        Email del tercero
+        <input id="email" type="email" value="brayanmedinacardozo@gmail.com" />
+      </label>
+      <div id="niu-widget"></div>
+      <h2>Eventos</h2>
+      <pre id="log" aria-live="polite"></pre>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

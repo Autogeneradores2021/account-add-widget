@@ -1,0 +1,305 @@
+/* Las variables --aw-* heredan a través del Shadow DOM: el host puede personalizarlas. */
+:host,
+.aw-host {
+  --_primary: var(--aw-primary, #0098db);
+  --_primary-hover: var(--aw-primary-hover, #046b97);
+  --_text: var(--aw-text, #1f2937);
+  --_muted: var(--aw-muted, #6b7280);
+  --_border: var(--aw-border, #d1d5db);
+  --_bg: var(--aw-bg, #ffffff);
+  --_surface: var(--aw-surface, #f9fafb);
+  --_success: var(--aw-success, #047857);
+  --_danger: var(--aw-danger, #b91c1c);
+  --_warning: var(--aw-warning, #92400e);
+  --_radius: var(--aw-radius, 8px);
+  --_font: var(--aw-font, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif);
+}
+
+:host {
+  display: inline-block;
+}
+
+.aw-host {
+  font-family: var(--_font);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--_text);
+}
+
+.aw-host *,
+.aw-host *::before,
+.aw-host *::after {
+  box-sizing: border-box;
+}
+
+.aw-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Botones */
+.aw-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.55em 1.1em;
+  border: 1px solid transparent;
+  border-radius: var(--_radius);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s;
+}
+.aw-btn:focus-visible,
+.aw-icon-btn:focus-visible,
+.aw-table-wrapper:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--_primary) 45%, transparent);
+  outline-offset: 2px;
+}
+.aw-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.aw-btn--primary {
+  background: var(--_primary);
+  color: #fff;
+}
+.aw-btn--primary:hover:not(:disabled) {
+  background: var(--_primary-hover);
+}
+.aw-btn--secondary {
+  background: var(--_bg);
+  color: var(--_text);
+  border-color: var(--_border);
+}
+.aw-btn--secondary:hover:not(:disabled) {
+  background: var(--_surface);
+}
+.aw-icon-btn {
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--_muted);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.aw-icon-btn:hover:not(:disabled) {
+  background: var(--_surface);
+}
+
+/* Modal */
+.aw-modal {
+  width: min(760px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: 0;
+  border-radius: calc(var(--_radius) * 1.5);
+  background: var(--_bg);
+  color: var(--_text);
+  font-family: var(--_font);
+  box-shadow: 0 20px 50px rgb(0 0 0 / 0.25);
+}
+.aw-modal::backdrop {
+  background: rgb(15 23 42 / 0.55);
+}
+.aw-flow {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 2rem);
+}
+.aw-modal__header,
+.aw-modal__footer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.25rem;
+}
+.aw-modal__header {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--_border);
+}
+.aw-modal__title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+.aw-modal__body {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  overflow: auto;
+}
+.aw-modal__footer {
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--_border);
+}
+
+/* Dropzone */
+.aw-dropzone {
+  position: relative;
+  display: grid;
+  gap: 0.25rem;
+  justify-items: center;
+  padding: 2rem 1rem;
+  border: 2px dashed var(--_border);
+  border-radius: var(--_radius);
+  background: var(--_surface);
+  text-align: center;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.aw-dropzone--active {
+  border-color: var(--_primary);
+  background: color-mix(in srgb, var(--_primary) 8%, var(--_bg));
+}
+.aw-dropzone:has(input:focus-visible) {
+  outline: 3px solid color-mix(in srgb, var(--_primary) 45%, transparent);
+  outline-offset: 2px;
+}
+.aw-dropzone__label {
+  display: grid;
+  gap: 0.5rem;
+  justify-items: center;
+  cursor: pointer;
+}
+.aw-dropzone__icon {
+  font-size: 1.75rem;
+  color: var(--_primary);
+}
+.aw-dropzone__hint {
+  margin: 0;
+  color: var(--_muted);
+  font-size: 0.85em;
+}
+.aw-link {
+  color: var(--_primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Resumen y mensajes */
+.aw-summary__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+}
+.aw-summary__list > div {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--_radius);
+  background: var(--_surface);
+}
+.aw-summary__list dt {
+  color: var(--_muted);
+  font-size: 0.8em;
+}
+.aw-summary__list dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.aw-note {
+  margin: 0.5rem 0 0;
+  color: var(--_muted);
+}
+.aw-note--warning {
+  color: var(--_warning);
+}
+.aw-note ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1.25rem;
+}
+.aw-feedback {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--_radius);
+  border-left: 4px solid currentColor;
+}
+.aw-feedback--success {
+  color: var(--_success);
+  background: color-mix(in srgb, var(--_success) 10%, var(--_bg));
+}
+.aw-feedback--error {
+  color: var(--_danger);
+  background: color-mix(in srgb, var(--_danger) 10%, var(--_bg));
+}
+.aw-spinner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  color: var(--_muted);
+}
+.aw-spinner__icon {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--_border);
+  border-top-color: var(--_primary);
+  border-radius: 50%;
+  animation: aw-spin 0.8s linear infinite;
+}
+@keyframes aw-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aw-spinner__icon {
+    animation-duration: 2.4s;
+  }
+}
+
+/* Tabla */
+.aw-table-wrapper {
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--_border);
+  border-radius: var(--_radius);
+}
+.aw-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.aw-table th,
+.aw-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--_border);
+}
+.aw-table th {
+  position: sticky;
+  top: 0;
+  background: var(--_surface);
+  font-size: 0.85em;
+  color: var(--_muted);
+}
+.aw-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.aw-table__row--missing {
+  color: var(--_muted);
+}
+.aw-badge {
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  border-radius: 999px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+.aw-badge--ok {
+  color: var(--_success);
+  background: color-mix(in srgb, var(--_success) 12%, var(--_bg));
+}
+.aw-badge--ko {
+  color: var(--_danger);
+  background: color-mix(in srgb, var(--_danger) 12%, var(--_bg));
+}

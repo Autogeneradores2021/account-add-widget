@@ -1,0 +1,26 @@
+export const DEFAULT_TEXTS = {
+  trigger: 'Asociar cuentas NIU',
+  title: 'Asociar cuentas NIU',
+  dropzoneLabel: 'Arrastra aquí tu archivo CSV o',
+  dropzoneAction: 'selecciónalo',
+  dropzoneHint: 'Un NIU numérico por línea. Tamaño máximo:',
+  checking: 'Consultando cuentas…',
+  submitting: 'Asociando cuentas…',
+  continue: 'Continuar',
+  cancel: 'Cancelar',
+  close: 'Cerrar',
+  reload: 'Cargar otro archivo',
+  success: 'Las cuentas fueron asociadas correctamente.',
+  tableCaption: 'Resultado de la validación de cuentas',
+  colNiu: 'NIU',
+  colStatus: 'Estado',
+  colAddress: 'Dirección',
+  colOwner: 'Propietario',
+  exists: 'Existe',
+  notExists: 'No existe',
+  noOwner: 'Sin propietario',
+  noExisting: 'Ninguna de las cuentas existe; no hay cuentas para asociar.',
+  unexpected: 'Ocurrió un error inesperado en el widget.',
+}
+
+export type WidgetTexts = typeof DEFAULT_TEXTS

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account Widget — demo del bundle</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; }
+      /* Personalización opcional del widget mediante variables CSS. */
+      .account-widget, #niu-widget { --aw-primary: #0f766e; --aw-primary-hover: #115e59; }
+      pre { background: #0f172a; color: #e2e8f0; padding: 1rem; border-radius: 8px; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Demo: página HTML sin React</h1>
+
+      <h2>1. API JavaScript</h2>
+      <div id="niu-widget"></div>
+
+      <h2>2. Auto-render con atributos data-*</h2>
+      <div
+        class="account-widget"
+        data-email="brayanmedinacardozo@gmail.com"
+        data-api-base-url="http://localhost:8081/account-api/public/api"
+        data-callback="onNiuSuccess"
+        data-error-callback="onNiuError"
+      ></div>
+
+      <h2>Eventos</h2>
+      <pre id="log"></pre>
+    </main>
+
+    <script>
+      const log = (name, detail) => {
+        document.getElementById('log').textContent += name + ' ' + JSON.stringify(detail ?? '') + '\n'
+      }
+      function onNiuSuccess(result) { log('[data-*] success', result) }
+      function onNiuError(error) { log('[data-*] error', { code: error.code, message: error.message }) }
+
+      function initAccountWidget() {
+        const widget = AccountWidget.render('#niu-widget', {
+          apiBaseUrl: 'http://localhost:8081/account-api/public/api',
+          email: 'brayanmedinacardozo@gmail.com',
+          getCsrfToken: async () => '',
+          onSuccess: (result) => log('success', result),
+          onError: (error) => log('error', { code: error.code, message: error.message }),
+          onComplete: (result) => log('complete', result),
+        })
+        document.getElementById('niu-widget')
+          .addEventListener('accountwidget:statusLoaded', (event) => log('event statusLoaded', event.detail.length + ' filas'))
+        window.niuWidget = widget
+      }
+    </script>
+    <!-- Como reCAPTCHA: ?onload= ejecuta la función cuando el script está listo. -->
+    <script src="../dist/account-widget.js?onload=initAccountWidget" async></script>
+  </body>
+</html>
